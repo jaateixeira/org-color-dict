@@ -1,0 +1,17 @@
+name: Validate JSON
+
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate JSON
+        run: |
+          if jq empty firm_color_dict.json; then
+            echo "✅ Valid JSON"
+          else
+            echo "❌ Invalid JSON"
+            exit 1
+          fi
